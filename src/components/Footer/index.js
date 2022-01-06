@@ -7,7 +7,7 @@ export default function Footer(){
             <Link to="/hoje">
                 <div>Hoje</div>
             </Link>
-            <Link to="historico">Histórico</Link>
+            <Link to="/historico">Histórico</Link>
         </Container>
     )
 }

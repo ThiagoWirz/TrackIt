@@ -12,5 +12,10 @@ function logIn(formData){
     return promise
 }
 
-export {signUp, logIn}
+function getTask(config){
+    const promise = axios.get(`${BASE_URL}/habits`, config)
+    return promise
+}
+
+export {signUp, logIn, getTask}
 
