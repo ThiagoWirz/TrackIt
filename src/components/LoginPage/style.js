@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.form`
+const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -8,6 +8,12 @@ const Container = styled.form`
   padding-top: 68px;
   img {
     margin-bottom: 33px;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   input {
     width: 303px;
