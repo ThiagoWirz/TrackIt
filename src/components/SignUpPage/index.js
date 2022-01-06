@@ -11,9 +11,9 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
-    name: "",
-    image:""
+    name: "" ,
+    image:"",
+    password: ""
   })
 
   function handleInputChange(e) {
@@ -27,7 +27,7 @@ export default function SignUpPage() {
     const promise = signUp(formData)
     promise.then(response => {console.log(response.data)  
     setLoading(false)})
-    promise.catch(error => {console.log(error.response.data)
+    promise.catch((error) => {alert(error.response.data.message)
     setLoading(false)})
   }
 
