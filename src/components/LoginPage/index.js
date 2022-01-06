@@ -19,7 +19,7 @@ export default function LoginPage({ setUser }) {
     const promise = logIn(formData);
     promise.then(response => {console.log(response.data)
     setLoading(false)})
-    promise.catch(error => {console.log(error.response.data)
+    promise.catch(error => {alert(error.response.data.message)
     setLoading(false)})
 
   }
