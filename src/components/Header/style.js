@@ -11,8 +11,8 @@ left: 0;
     align-items: center;
     background-color: #126BA5;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    padding-left: 18px;
-    padding-right: 18px;
+    padding: 0 18px;
+    
     h1{
         font-family: 'Playball', cursive;
         font-size: 39px;
