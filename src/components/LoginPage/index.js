@@ -1,12 +1,15 @@
 import logo from "../../assets/img/logo.png";
 import { Container, Button } from "./style";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { logIn } from "../../services/trackit";
 import Loader from "react-loader-spinner";
-export default function LoginPage({ setUser }) {
+import UserContext from "../../Contexts/userContext";
+
+export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const {setUser} = useContext(UserContext)
   const navigate = useNavigate();
 
   function handleInputChange(e) {
