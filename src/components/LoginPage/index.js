@@ -1,35 +1,39 @@
 import logo from "../../assets/img/logo.png";
 import { Container, Button } from "./style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { logIn } from "../../services/trackit";
 import Loader from "react-loader-spinner";
 export default function LoginPage({ setUser }) {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   function handleInputChange(e) {
     formData[e.target.name] = e.target.value;
     setFormData({ ...formData });
   }
 
-  function handleLogIn(e){
+  function handleLogIn(e) {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const promise = logIn(formData);
-    promise.then(response => {console.log(response.data)
-    setLoading(false)})
-    promise.catch(error => {alert(error.response.data.message)
-    setLoading(false)})
-
+    promise.then((response) => {
+      setUser(response.data);
+      setLoading(false);
+      navigate("/hoje");
+    });
+    promise.catch((error) => {
+      alert(error.response.data.message);
+      setLoading(false);
+    });
   }
-
 
   return (
     <Container>
       <img src={logo} alt="TrackIt" />
       <form onSubmit={handleLogIn}>
-      <input
+        <input
           value={formData.email}
           type="email"
           placeholder="email"
@@ -56,7 +60,8 @@ export default function LoginPage({ setUser }) {
             />
           ) : (
             "Cadastrar"
-          )}</Button>
+          )}
+        </Button>
       </form>
       <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
     </Container>
