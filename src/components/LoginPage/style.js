@@ -9,7 +9,7 @@ const Container = styled.div`
   img {
     margin-bottom: 33px;
   }
-  form{
+  form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,6 +47,7 @@ const Button = styled.button`
   line-height: 26px;
   color: #ffffff;
   margin-bottom: 25px;
+  opacity: ${(props) => (!props.disabled ? 1 : 0.7)};
 `;
 
 export { Container, Button };

@@ -8,7 +8,7 @@ import {
   DaySelector,
   DayBox,
   ButtonBox,
-  Habit
+  Habit,
 } from "./style";
 import { useContext } from "react";
 import UserContext from "../../Contexts/userContext";
@@ -35,11 +35,11 @@ export default function HabitsPage() {
 
   useEffect(() => {
     renderHabits();
-}, []);
+  }, []);
 
-  function renderHabits(){
-    const promise = getHabits(config)
-      promise.then(response => setHabits(response.data))
+  function renderHabits() {
+    const promise = getHabits(config);
+    promise.then((response) => setHabits(response.data));
   }
 
   function handleSelectDay(selectedDay) {
@@ -74,22 +74,23 @@ export default function HabitsPage() {
     const data = { name: taskName, days: selectedDays };
     const promise = createHabit(data, config);
     promise.then((response) => {
-      resetTaksCreation()
+      resetTaksCreation();
       renderHabits();
       setLoading(false);
     });
-    promise.catch((error) => {alert(error.response.data.message)
-    setLoading(false)});
+    promise.catch((error) => {
+      alert(error.response.data.message);
+      setLoading(false);
+    });
   }
 
-  function handleDeleteHabit(id){
-    if(window.confirm("Gostaria realmente de deletar esse hábito?")){
-      const promise = deleteHabit(id, config)
-      promise.then(() => renderHabits())
-      promise.catch(error => alert(error.response.data.message))
+  function handleDeleteHabit(id) {
+    if (window.confirm("Gostaria realmente de deletar esse hábito?")) {
+      const promise = deleteHabit(id, config);
+      promise.then(() => renderHabits());
+      promise.catch((error) => alert(error.response.data.message));
     }
   }
-
 
   return (
     <>
@@ -147,23 +148,32 @@ export default function HabitsPage() {
             </form>
           </TaskCreation>
         )}
-        {habits.length===0 ? <span>
-          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-          começar a trackear!
-        </span> : habits.map(habit => <Habit key={habit.id}>
-                            <p>{habit.name}</p>
-                            <ion-icon onClick={() => handleDeleteHabit(habit.id)} name="trash-outline"></ion-icon>
-                            <DaySelector>
-                                {weekDays.map((day, index) =>
-                                    <DayBox
-                                        key={index}
-                                        selected={habit.days.includes(index) ? true : false}>
-                                        {day.day}
-                                    </DayBox>
-                                )}
-                            </DaySelector>
-                        </Habit>)}
-        
+        {habits.length === 0 ? (
+          <span>
+            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+            começar a trackear!
+          </span>
+        ) : (
+          habits.map((habit) => (
+            <Habit key={habit.id}>
+              <p>{habit.name}</p>
+              <ion-icon
+                onClick={() => handleDeleteHabit(habit.id)}
+                name="trash-outline"
+              ></ion-icon>
+              <DaySelector>
+                {weekDays.map((day, index) => (
+                  <DayBox
+                    key={index}
+                    selected={habit.days.includes(index) ? true : false}
+                  >
+                    {day.day}
+                  </DayBox>
+                ))}
+              </DaySelector>
+            </Habit>
+          ))
+        )}
       </Container>
       <Footer />
     </>

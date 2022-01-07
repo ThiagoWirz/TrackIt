@@ -9,7 +9,7 @@ import UserContext from "../../Contexts/userContext";
 export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const {setUser} = useContext(UserContext)
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   function handleInputChange(e) {

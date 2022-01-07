@@ -7,6 +7,7 @@ import { useState } from "react";
 import UserContext from "./Contexts/userContext";
 import "./assets/css/reset.css";
 import "./assets/css/style.css";
+import HistoryPage from "./components/HistoryPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/cadastro" element={<SignUpPage />} />
           <Route path="/hoje" element={<TodayPage />} />
           <Route path="/habitos" element={<HabitsPage />} />
+          <Route path="/historico" element={<HistoryPage/>} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
