@@ -25,8 +25,8 @@ export default function SignUpPage() {
     setLoading(true);
     const promise = signUp(formData);
     promise.then(() => {
-      navigate("/");
       setLoading(false);
+      navigate("/");
     });
     promise.catch((error) => {
       alert(error.response.data.message);

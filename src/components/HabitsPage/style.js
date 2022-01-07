@@ -8,8 +8,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 100px 0;
-  p {
-    font-family: 'Lexend Deca', sans-serif;
+  span {
+    font-family: "Lexend Deca", sans-serif;
     font-size: 18px;
     line-height: 22px;
     color: #666666;
@@ -18,7 +18,6 @@ const Container = styled.div`
   }
 `;
 
-
 const MyHabits = styled.div`
   width: 100%;
   height: 35px;
@@ -26,7 +25,7 @@ const MyHabits = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 18px;
-  p {
+  span {
     font-size: 23px;
     color: #126ba5;
   }
@@ -42,4 +41,82 @@ const MyHabits = styled.div`
     border-radius: 5px;
   }
 `;
-export { Container, MyHabits };
+
+const TaskCreation = styled.div`
+  width: 90%;
+  height: 180px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 7px;
+  margin: 20px 0;
+  form{
+    width: 90%;
+    height: 100%;
+  }
+  input {
+    width: 100%;
+    height: 45px;
+    font-size: 20px;
+    line-height: 25px;
+    text-indent: 11px;
+    margin: 18px 0 10px 0;
+    border: 1px solid #d5d5d5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    ::placeholder {
+      color: #dbdbdb;
+    }
+  }
+`;
+
+const ButtonBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  button {
+    width: 84px;
+    height: 35px;
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 16px;
+    border: hidden;
+    border-radius: 5px;
+
+    :first-child {
+      background: #ffffff;
+      color: #52b6ff;
+      margin-right: 18px;
+    }
+
+    :last-child {
+      background: #52b6ff;
+      color: #ffffff;
+    }
+  }
+  .opacity {
+    opacity: 0.7;
+  }
+`;
+
+const DaySelector = styled.div`
+  display: flex;
+  gap: 4px
+`;
+
+const DayBox = styled.p`
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  font-family: "Lexend Deca", sans-serif;
+  color: ${(props) => (props.selected ? "#FFFFFF" : "#DBDBDB")};
+  background: ${(props) => (props.selected ? "#CFCFCF" : "#FFFFFF")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #d5d5d5;
+  border-radius: 5px;
+`;
+
+export { Container, MyHabits, TaskCreation, DaySelector, DayBox, ButtonBox };

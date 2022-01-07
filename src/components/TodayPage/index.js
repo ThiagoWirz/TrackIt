@@ -14,9 +14,7 @@ export default function TodayPage() {
     useEffect(() =>{
         const promise = getTask(config)
         promise.then(response => setTasks(response.data))
-        console.log(tasks)
     },[])
-    console.log(tasks)
 
   return (
     <>
