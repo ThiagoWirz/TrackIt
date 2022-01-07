@@ -17,7 +17,7 @@ const Container = styled.footer`
         line-height: 22px;
         color: #52B6FF;
     }
-    div {
+    .progress-bar{
         width: 91px;
         height: 91px;
         background: #52B6FF;
