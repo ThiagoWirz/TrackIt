@@ -10,9 +10,10 @@ import "./assets/css/style.css";
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const [progress, setProgress] = useState(0);
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{user, setUser, progress, setProgress}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />

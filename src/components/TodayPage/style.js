@@ -12,5 +12,11 @@ p{
         font-family: "Lexend Deca", sans-serif;
 }
 `
+const Progress = styled.span`
+    font-size: 18px;
+    line-height: 22px;
+    color: ${props => props.progress > 0 ? '#8FC549' : '#BABABA'};
+    margin-bottom: 29px;
+`
 
-export{Container}
+export{Container, Progress}

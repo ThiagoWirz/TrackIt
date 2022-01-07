@@ -1,13 +1,13 @@
 import Footer from "../Footer";
 import Header from "../Header/Header";
-import { Container } from "./style";
+import { Container, Progress } from "./style";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../Contexts/userContext";
 import { getTodayHabits } from "../../services/trackit";
 import dayjs from "dayjs";
 
 export default function TodayPage() {
-    const {user} = useContext(UserContext)
+    const {user, progress, setProgress} = useContext(UserContext)
     const [habits, sethabits] = useState(null)
     const config = {headers: {Authorization: `Bearer ${user.token}`}}
     const weekDays = [
@@ -31,6 +31,7 @@ export default function TodayPage() {
       <Header />
       <Container>
           <p>{weekDays[dayjs().day()]}, {dayjs().date() < 10 ? `0${dayjs().date()}` : dayjs().date()}/{(dayjs().month() + 1) < 10 ? `0${(dayjs().month() + 1)}` : (dayjs().month() + 1)}</p>
+          <Progress progress={progress}>{progress > 0 ? `${progress}% dos hábitos concluídos` : 'Nenhum hábito concluído ainda'}</Progress>
       </Container>
       <Footer />
     </>
