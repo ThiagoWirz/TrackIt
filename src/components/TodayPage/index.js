@@ -8,8 +8,8 @@ import { getTask } from "../../services/trackit";
 export default function TodayPage() {
     const {user} = useContext(UserContext)
     const [tasks, setTasks] = useState(null)
-
     const config = {headers: {Authorization: `Bearer ${user.token}`}}
+    console.log(tasks)
 
     useEffect(() =>{
         const promise = getTask(config)

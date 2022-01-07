@@ -17,5 +17,10 @@ function getTask(config){
     return promise
 }
 
-export {signUp, logIn, getTask}
+function createHabit(data, config){
+    const promise = axios.post(`${BASE_URL}/habits`, data, config)
+    return promise
+}
+
+export {signUp, logIn, getTask, createHabit}
 

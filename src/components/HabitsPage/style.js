@@ -64,6 +64,7 @@ const TaskCreation = styled.div`
     border: 1px solid #d5d5d5;
     box-sizing: border-box;
     border-radius: 5px;
+    outline: none;
     ::placeholder {
       color: #dbdbdb;
     }
