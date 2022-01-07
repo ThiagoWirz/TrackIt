@@ -79,7 +79,8 @@ export default function HabitsPage() {
       console.log(response.data);
       setLoading(false);
     });
-    promise.catch((error) => console.log(error.response.data));
+    promise.catch((error) => {alert(error.response.data.message)
+    setLoading(false)});
   }
 
   console.log(habits)
@@ -119,7 +120,7 @@ export default function HabitsPage() {
                 <button
                   disabled={loading}
                   type="button"
-                  onClick={resetTaksCreation}
+                  onClick={() => setCreateTask(false)}
                 >
                   Cancelar
                 </button>
