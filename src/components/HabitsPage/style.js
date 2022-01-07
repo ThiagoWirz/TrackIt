@@ -14,7 +14,6 @@ const Container = styled.div`
     line-height: 22px;
     color: #666666;
     padding: 0 20px;
-    margin-top: 22px;
   }
 `;
 

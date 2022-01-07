@@ -14,6 +14,13 @@ export default function HabitsPage() {
     { day: "S", selected: false },
   ]);
 
+
+  function handleSelectDay(selectedDay){
+    const day = weekDays.find(currentDay => selectedDay === currentDay)
+    day.selected = !day.selected
+    setWeekDays([...weekDays])
+  }
+
   return (
     <>
       <Header />
@@ -30,7 +37,8 @@ export default function HabitsPage() {
                 {weekDays.map((day, index) => (
                   <DayBox
                     key={index}
-                    selected={day.selected}>
+                    selected={day.selected}
+                    onClick={() => handleSelectDay(day)}>
                     {day.day}
                   </DayBox>
                 ))}
