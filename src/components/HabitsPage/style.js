@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-color: #e5e5e5;
   display: flex;
@@ -13,7 +13,6 @@ const Container = styled.div`
     font-size: 18px;
     line-height: 22px;
     color: #666666;
-    padding: 0 20px;
   }
 `;
 
@@ -105,7 +104,7 @@ const DaySelector = styled.div`
   gap: 4px
 `;
 
-const DayBox = styled.p`
+const DayBox = styled.button`
   width: 30px;
   height: 30px;
   font-size: 20px;
@@ -119,4 +118,30 @@ const DayBox = styled.p`
   border-radius: 5px;
 `;
 
-export { Container, MyHabits, TaskCreation, DaySelector, DayBox, ButtonBox };
+const Habit = styled.div`
+    width: 90%;
+    height: 91px;
+    margin: 10px 0;
+    display: flex;
+    padding: 0 15px;
+    gap: 8px;
+    flex-direction: column;
+    background: #FFFFFF;
+    border-radius: 7px;
+    position: relative;
+    p{
+        width: 90%;
+        font-size: 20px;
+        line-height: 25px;
+        color: #666666;
+        margin-top: 13px;
+    }
+    ion-icon {
+        font-size: 15px;
+        position: absolute;
+        top: 9px;
+        right: 8px;
+    }
+`
+
+export { Container, MyHabits, TaskCreation, DaySelector, DayBox, ButtonBox, Habit };

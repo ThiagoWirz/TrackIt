@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../Footer";
 import Header from "../Header/Header";
-import { Container, MyHabits, TaskCreation, DaySelector, DayBox, ButtonBox } from "./style";
+import {
+  Container,
+  MyHabits,
+  TaskCreation,
+  DaySelector,
+  DayBox,
+  ButtonBox,
+  Habit
+} from "./style";
 import { useContext } from "react";
 import UserContext from "../../Contexts/userContext";
-import { createHabit } from "../../services/trackit";
+import { createHabit, getTask } from "../../services/trackit";
+import Loader from "react-loader-spinner";
 
 export default function HabitsPage() {
+  const [habits, setHabits] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [createTask, setCreateTask] = useState(false);
   const [weekDays, setWeekDays] = useState([
     { day: "D", selected: false, index: 0 },
@@ -17,26 +28,34 @@ export default function HabitsPage() {
     { day: "S", selected: false, index: 5 },
     { day: "S", selected: false, index: 6 },
   ]);
-  const [selectedDays, setSelectedDays] = useState([])
-  const [taskName, setTaskName] = useState("")
-  const {user} = useContext(UserContext)
-  const config = {headers: {Authorization: `Bearer ${user.token}`}}
+  const [selectedDays, setSelectedDays] = useState([]);
+  const [taskName, setTaskName] = useState("");
+  const { user } = useContext(UserContext);
+  const config = { headers: { Authorization: `Bearer ${user.token}` } };
 
+  useEffect(() => {
+    renderHabits();
+}, []);
 
-  function handleSelectDay(selectedDay){
-    const day = weekDays.find(currentDay => selectedDay === currentDay)
-    day.selected = !day.selected
-    if(!selectedDays.includes(selectedDay.index)){
-      setSelectedDays([...selectedDays, selectedDay.index])
-    } else{
-      setSelectedDays(selectedDays.filter((i) => i !== selectedDay.index))
-    }
-    setWeekDays([...weekDays])
+  function renderHabits(){
+    const promise = getTask(config)
+      promise.then(response => setHabits(response.data))
   }
 
-  function resetTaksCreation(){
-    setTaskName("")
-    setSelectedDays([])
+  function handleSelectDay(selectedDay) {
+    const day = weekDays.find((currentDay) => selectedDay === currentDay);
+    day.selected = !day.selected;
+    if (!selectedDays.includes(selectedDay.index)) {
+      setSelectedDays([...selectedDays, selectedDay.index]);
+    } else {
+      setSelectedDays(selectedDays.filter((i) => i !== selectedDay.index));
+    }
+    setWeekDays([...weekDays]);
+  }
+
+  function resetTaksCreation() {
+    setTaskName("");
+    setSelectedDays([]);
     setWeekDays([
       { day: "D", selected: false, index: 0 },
       { day: "S", selected: false, index: 1 },
@@ -45,18 +64,25 @@ export default function HabitsPage() {
       { day: "Q", selected: false, index: 4 },
       { day: "S", selected: false, index: 5 },
       { day: "S", selected: false, index: 6 },
-    ])
-    setCreateTask(false)
+    ]);
+    setCreateTask(false);
   }
 
-  function handleCreateHabit(e){
+  function handleCreateHabit(e) {
     e.preventDefault();
-    const data = {name: taskName, days: selectedDays}
-    const promise = createHabit(data, config)
-    promise.then(response => console.log(response.data))
-    promise.catch(error => console.log(error.response.data))
-
+    setLoading(true);
+    const data = { name: taskName, days: selectedDays };
+    const promise = createHabit(data, config);
+    promise.then((response) => {
+      resetTaksCreation()
+      renderHabits();
+      console.log(response.data);
+      setLoading(false);
+    });
+    promise.catch((error) => console.log(error.response.data));
   }
+
+  console.log(habits)
 
   return (
     <>
@@ -69,28 +95,68 @@ export default function HabitsPage() {
         {createTask && (
           <TaskCreation>
             <form onSubmit={handleCreateHabit}>
-              <input type="text" placeholder="nome do hábito" value= {taskName} onChange={(e) => setTaskName(e.target.value)} />
+              <input
+                disabled={loading}
+                type="text"
+                placeholder="nome do hábito"
+                value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
+              />
               <DaySelector>
                 {weekDays.map((day, index) => (
                   <DayBox
                     key={index}
                     selected={day.selected}
-                    onClick={() => handleSelectDay(day)}>
+                    type="button"
+                    disabled={loading}
+                    onClick={() => handleSelectDay(day)}
+                  >
                     {day.day}
                   </DayBox>
                 ))}
               </DaySelector>
               <ButtonBox>
-                <button type= "button" onClick={resetTaksCreation}>Cancelar</button>
-                <button>Salvar</button>
+                <button
+                  disabled={loading}
+                  type="button"
+                  onClick={resetTaksCreation}
+                >
+                  Cancelar
+                </button>
+                <button disabled={loading}>
+                  {loading ? (
+                    <Loader
+                      type="ThreeDots"
+                      color="#FFFFFF"
+                      height={13}
+                      width={51}
+                      timeout={3000}
+                    />
+                  ) : (
+                    "Salvar"
+                  )}
+                </button>
               </ButtonBox>
             </form>
           </TaskCreation>
         )}
-        <span>
+        {habits.length===0 ? <span>
           Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
           começar a trackear!
-        </span>
+        </span> : habits.map(habit => <Habit key={habit.id}>
+                            <p>{habit.name}</p>
+                            <ion-icon name="trash-outline"></ion-icon>
+                            <DaySelector>
+                                {weekDays.map((day, index) =>
+                                    <DayBox
+                                        key={index}
+                                        selected={habit.days.includes(index) ? true : false}>
+                                        {day.day}
+                                    </DayBox>
+                                )}
+                            </DaySelector>
+                        </Habit>)}
+        
       </Container>
       <Footer />
     </>

@@ -12,6 +12,7 @@ left: 0;
     background-color: #126BA5;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     padding: 0 18px;
+    z-index: 1;
     
     h1{
         font-family: 'Playball', cursive;
