@@ -28,7 +28,19 @@ export default function TodayPage() {
 
     function renderHabits(){
       const promise = getTodayHabits(config)
-        promise.then(response => sethabits(response.data))
+        promise.then(response => {sethabits(response.data)
+        setProgress(() => calcProgress(response.data))})
+    }
+
+    function calcProgress(habitList){
+      let counter = 0;
+      for (let i = 0; i < habitList.length; i++) {
+          if (habitList[i].done) {
+              counter++;
+          }
+      }
+      const percent = ((counter * 100) / habitList.length).toFixed();
+      return percent;
     }
 
     function handleMarkHabit(id, done){
