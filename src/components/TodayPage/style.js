@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 100%;
+  min-height: 100vh;
   padding: 100px 18px;
   background-color: #f2f2f2;
   .title {
@@ -11,12 +11,14 @@ const Container = styled.div`
     margin-bottom: 3px;
     font-family: "Lexend Deca", sans-serif;
   }
+  .margin{
+    margin-top: 28px;
+  }
 `;
 const Progress = styled.span`
   font-size: 18px;
   line-height: 22px;
   color: ${(props) => (props.progress > 0 ? "#8FC549" : "#BABABA")};
-  margin-bottom: 29px;
 `;
 
 const Habit = styled.div`
@@ -27,7 +29,6 @@ const Habit = styled.div`
   padding: 0 15px;
   background: #ffffff;
   margin-bottom: 10px;
-  box-sizing: border-box;
   border-radius: 7px;
   .habit-name {
     font-size: 20px;

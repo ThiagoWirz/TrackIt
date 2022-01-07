@@ -70,7 +70,7 @@ export default function TodayPage() {
             ? `${progress}% dos hábitos concluídos`
             : "Nenhum hábito concluído ainda"}
         </Progress>
-
+      <div className="margin">      
         {habits.map((habit) => {
           return (
             <Habit key={habit.id}>
@@ -107,6 +107,7 @@ export default function TodayPage() {
             </Habit>
           );
         })}
+        </div>
       </Container>
       <Footer />
     </>
