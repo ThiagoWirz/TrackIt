@@ -12,7 +12,7 @@ import {
 } from "./style";
 import { useContext } from "react";
 import UserContext from "../../Contexts/userContext";
-import { createHabit, deleteHabit, getTask } from "../../services/trackit";
+import { createHabit, deleteHabit, getHabits } from "../../services/trackit";
 import Loader from "react-loader-spinner";
 
 export default function HabitsPage() {
@@ -38,7 +38,7 @@ export default function HabitsPage() {
 }, []);
 
   function renderHabits(){
-    const promise = getTask(config)
+    const promise = getHabits(config)
       promise.then(response => setHabits(response.data))
   }
 
@@ -76,7 +76,6 @@ export default function HabitsPage() {
     promise.then((response) => {
       resetTaksCreation()
       renderHabits();
-      console.log(response.data);
       setLoading(false);
     });
     promise.catch((error) => {alert(error.response.data.message)
@@ -87,11 +86,10 @@ export default function HabitsPage() {
     if(window.confirm("Gostaria realmente de deletar esse hábito?")){
       const promise = deleteHabit(id, config)
       promise.then(() => renderHabits())
-      promise.catch(error => console.log(error.response.data))
+      promise.catch(error => alert(error.response.data.message))
     }
   }
 
-  console.log(habits)
 
   return (
     <>

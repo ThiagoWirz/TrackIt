@@ -12,7 +12,7 @@ function logIn(formData){
     return promise
 }
 
-function getTask(config){
+function getHabits(config){
     const promise = axios.get(`${BASE_URL}/habits`, config)
     return promise
 }
@@ -27,5 +27,10 @@ function deleteHabit(id, config){
     return promise
 }
 
-export {signUp, logIn, getTask, createHabit, deleteHabit}
+function getTodayHabits(config){
+    const promise = axios.get(`${BASE_URL}/habits/today`, config)
+    return promise
+}
+
+export {signUp, logIn, getHabits, createHabit, deleteHabit, getTodayHabits}
 

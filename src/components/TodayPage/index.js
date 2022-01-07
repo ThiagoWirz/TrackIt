@@ -3,17 +3,17 @@ import Header from "../Header/Header";
 import { Container } from "./style";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../Contexts/userContext";
-import { getTask } from "../../services/trackit";
+import { getTodayHabits } from "../../services/trackit";
 
 export default function TodayPage() {
     const {user} = useContext(UserContext)
-    const [tasks, setTasks] = useState(null)
+    const [habits, sethabits] = useState(null)
     const config = {headers: {Authorization: `Bearer ${user.token}`}}
-    console.log(tasks)
+    console.log(habits)
 
     useEffect(() =>{
-        const promise = getTask(config)
-        promise.then(response => setTasks(response.data))
+        const promise = getTodayHabits(config)
+        promise.then(response => sethabits(response.data))
     },[])
 
   return (
