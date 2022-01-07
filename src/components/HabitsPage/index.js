@@ -12,7 +12,7 @@ import {
 } from "./style";
 import { useContext } from "react";
 import UserContext from "../../Contexts/userContext";
-import { createHabit, getTask } from "../../services/trackit";
+import { createHabit, deleteHabit, getTask } from "../../services/trackit";
 import Loader from "react-loader-spinner";
 
 export default function HabitsPage() {
@@ -83,6 +83,14 @@ export default function HabitsPage() {
     setLoading(false)});
   }
 
+  function handleDeleteHabit(id){
+    if(window.confirm("Gostaria realmente de deletar esse hábito?")){
+      const promise = deleteHabit(id, config)
+      promise.then(() => renderHabits())
+      promise.catch(error => console.log(error.response.data))
+    }
+  }
+
   console.log(habits)
 
   return (
@@ -90,7 +98,7 @@ export default function HabitsPage() {
       <Header />
       <Container>
         <MyHabits>
-          <span>Meus hábitos</span>
+          <h1>Meus hábitos</h1>
           <div onClick={() => setCreateTask(true)}>+</div>
         </MyHabits>
         {createTask && (
@@ -146,7 +154,7 @@ export default function HabitsPage() {
           começar a trackear!
         </span> : habits.map(habit => <Habit key={habit.id}>
                             <p>{habit.name}</p>
-                            <ion-icon name="trash-outline"></ion-icon>
+                            <ion-icon onClick={() => handleDeleteHabit(habit.id)} name="trash-outline"></ion-icon>
                             <DaySelector>
                                 {weekDays.map((day, index) =>
                                     <DayBox

@@ -10,9 +10,13 @@ const Container = styled.div`
   padding: 100px 0;
   span {
     font-family: "Lexend Deca", sans-serif;
-    font-size: 18px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17.976px;
     line-height: 22px;
     color: #666666;
+    padding: 0 18px;
+    margin-top: 28px;
   }
 `;
 
@@ -23,7 +27,12 @@ const MyHabits = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 18px;
-  span {
+  h1 {
+    font-family: "Lexend Deca", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22.976px;
+    line-height: 29px;
     font-size: 23px;
     color: #126ba5;
   }
@@ -49,7 +58,7 @@ const TaskCreation = styled.div`
   align-items: center;
   border-radius: 7px;
   margin: 20px 0;
-  form{
+  form {
     width: 90%;
     height: 100%;
   }
@@ -101,7 +110,7 @@ const ButtonBox = styled.div`
 
 const DaySelector = styled.div`
   display: flex;
-  gap: 4px
+  gap: 4px;
 `;
 
 const DayBox = styled.button`
@@ -119,29 +128,38 @@ const DayBox = styled.button`
 `;
 
 const Habit = styled.div`
+  width: 90%;
+  height: 91px;
+  margin: 10px 0;
+  display: flex;
+  padding: 0 15px;
+  gap: 8px;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 7px;
+  position: relative;
+  p {
     width: 90%;
-    height: 91px;
-    margin: 10px 0;
-    display: flex;
-    padding: 0 15px;
-    gap: 8px;
-    flex-direction: column;
-    background: #FFFFFF;
-    border-radius: 7px;
-    position: relative;
-    p{
-        width: 90%;
-        font-size: 20px;
-        line-height: 25px;
-        color: #666666;
-        margin-top: 13px;
-    }
-    ion-icon {
-        font-size: 15px;
-        position: absolute;
-        top: 9px;
-        right: 8px;
-    }
-`
+    font-size: 20px;
+    line-height: 25px;
+    color: #666666;
+    margin-top: 13px;
+    font-family: "Lexend Deca", sans-serif;
+  }
+  ion-icon {
+    font-size: 15px;
+    position: absolute;
+    top: 9px;
+    right: 8px;
+  }
+`;
 
-export { Container, MyHabits, TaskCreation, DaySelector, DayBox, ButtonBox, Habit };
+export {
+  Container,
+  MyHabits,
+  TaskCreation,
+  DaySelector,
+  DayBox,
+  ButtonBox,
+  Habit,
+};

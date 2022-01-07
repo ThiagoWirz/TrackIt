@@ -22,5 +22,10 @@ function createHabit(data, config){
     return promise
 }
 
-export {signUp, logIn, getTask, createHabit}
+function deleteHabit(id, config){
+    const promise = axios.delete(`${BASE_URL}/habits/${id}`, config)
+    return promise
+}
+
+export {signUp, logIn, getTask, createHabit, deleteHabit}
 
