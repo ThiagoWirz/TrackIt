@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import { Container, Progress, Habit, CheckBox } from "./style";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../Contexts/userContext";
-import { getTodayHabits } from "../../services/trackit";
+import { getTodayHabits, markHabit } from "../../services/trackit";
 import dayjs from "dayjs";
 import checkmark from "../../assets/img/Vector.png"
 
@@ -23,9 +23,19 @@ export default function TodayPage() {
     console.log(habits)
 
     useEffect(() =>{
-        const promise = getTodayHabits(config)
-        promise.then(response => sethabits(response.data))
+        renderHabits();
     },[])
+
+    function renderHabits(){
+      const promise = getTodayHabits(config)
+        promise.then(response => sethabits(response.data))
+    }
+
+    function handleMarkHabit(id, done){
+      const promise = markHabit(id, done, config)
+      promise.then(renderHabits)
+      promise.catch(error => console.log(error.response.data.message))
+    }
 
     if(habits === null){
       return <></>
@@ -55,7 +65,7 @@ export default function TodayPage() {
                                         </p>
                                     </div>
                                 </div>
-                                <CheckBox check={habit.done}><img src={checkmark} alt="" /></CheckBox>
+                                <CheckBox onClick={() => handleMarkHabit(habit.id, habit.done)} check={habit.done}><img src={checkmark} alt="" /></CheckBox>
                             </Habit>)})}
                         
       </Container>

@@ -32,5 +32,16 @@ function getTodayHabits(config){
     return promise
 }
 
-export {signUp, logIn, getHabits, createHabit, deleteHabit, getTodayHabits}
+function markHabit(id, done, config){
+    if(!done){
+    const promise = axios.post(`${BASE_URL}/habits/${id}/check`, !done, config)
+    return promise
+}
+    else{
+        const promise = axios.post(`${BASE_URL}/habits/${id}/uncheck`, !done, config)
+        return promise
+    }
+}
+
+export {signUp, logIn, getHabits, createHabit, deleteHabit, getTodayHabits, markHabit}
 
