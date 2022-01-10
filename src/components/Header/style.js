@@ -25,6 +25,10 @@ const Container = styled.header`
     height: 51px;
     border-radius: 50%;
   }
+  ion-icon{
+    color: #FFFFFF;
+    font-size: 25px;
+  }
 `;
 
 export { Container };

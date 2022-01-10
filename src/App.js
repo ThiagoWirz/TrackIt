@@ -10,7 +10,8 @@ import "./assets/css/style.css";
 import HistoryPage from "./components/HistoryPage";
 
 export default function App() {
-  const [user, setUser] = useState(null);
+  const lastUser = JSON.parse(localStorage.getItem("Last User"))
+  const [user, setUser] = useState(lastUser);
   const [progress, setProgress] = useState(0);
 
   return (

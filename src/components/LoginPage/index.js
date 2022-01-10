@@ -1,7 +1,7 @@
 import logo from "../../assets/img/logo.png";
 import { Container, Button } from "./style";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { logIn } from "../../services/trackit";
 import Loader from "react-loader-spinner";
 import UserContext from "../../Contexts/userContext";
@@ -9,8 +9,15 @@ import UserContext from "../../Contexts/userContext";
 export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  
+  useEffect(() =>{
+    if(user !== null){
+     navigate("/hoje")
+   }
+  })
+   
 
   function handleInputChange(e) {
     formData[e.target.name] = e.target.value;
@@ -23,6 +30,7 @@ export default function LoginPage() {
     const promise = logIn(formData);
     promise.then((response) => {
       setUser(response.data);
+      localStorage.setItem('Last User', JSON.stringify(response.data));
       setLoading(false);
       navigate("/hoje");
     });

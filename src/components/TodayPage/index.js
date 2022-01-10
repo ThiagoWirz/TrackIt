@@ -1,11 +1,12 @@
 import Footer from "../Footer";
 import Header from "../Header/Header";
-import { Container, Progress, Habit, CheckBox } from "./style";
+import { Container, Progress, Habit, CheckBox, LoadingScreen } from "./style";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../Contexts/userContext";
 import { getTodayHabits, markHabit } from "../../services/trackit";
 import dayjs from "dayjs";
 import checkmark from "../../assets/img/Vector.png";
+import Loader from "react-loader-spinner";
 
 export default function TodayPage() {
   const { user, progress, setProgress } = useContext(UserContext);
@@ -51,7 +52,12 @@ export default function TodayPage() {
   }
 
   if (habits === null) {
-    return <></>;
+    return (<LoadingScreen>
+    <Loader type="TailSpin"
+    color="#000000"
+    timeout={3000}>
+    </Loader> Carregando
+    </LoadingScreen>);
   }
 
   return (
@@ -79,7 +85,7 @@ export default function TodayPage() {
                 <div className="habit-sequence">
                   <p>
                     Sequência atual:{" "}
-                    <span className={habit.done ? "record" : ""}>
+                    <span className={habit.done && "record"}>
                       {habit.currentSequence} dias
                     </span>
                   </p>
@@ -89,8 +95,7 @@ export default function TodayPage() {
                       className={
                         habit.currentSequence === habit.highestSequence &&
                         habit.done
-                          ? "record"
-                          : ""
+                          && "record"
                       }
                     >
                       {habit.highestSequence} dias

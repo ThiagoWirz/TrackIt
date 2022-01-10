@@ -14,9 +14,10 @@ import { useContext } from "react";
 import UserContext from "../../Contexts/userContext";
 import { createHabit, deleteHabit, getHabits } from "../../services/trackit";
 import Loader from "react-loader-spinner";
+import { LoadingScreen } from "../TodayPage/style";
 
 export default function HabitsPage() {
-  const [habits, setHabits] = useState([]);
+  const [habits, setHabits] = useState(null);
   const [loading, setLoading] = useState(false);
   const [createTask, setCreateTask] = useState(false);
   const [weekDays, setWeekDays] = useState([
@@ -90,6 +91,15 @@ export default function HabitsPage() {
       promise.then(() => renderHabits());
       promise.catch((error) => alert(error.response.data.message));
     }
+  }
+
+  if (habits === null) {
+    return (<LoadingScreen>
+    <Loader type="TailSpin"
+    color="#000000"
+    timeout={3000}>
+    </Loader> Carregando
+    </LoadingScreen>);
   }
 
   return (

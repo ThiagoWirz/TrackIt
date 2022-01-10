@@ -60,4 +60,12 @@ const CheckBox = styled.div`
   border-radius: 5px;
 `;
 
-export { Container, Progress, Habit, CheckBox };
+const LoadingScreen = styled.div`
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+`
+
+export { Container, Progress, Habit, CheckBox, LoadingScreen };
