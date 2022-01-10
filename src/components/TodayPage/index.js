@@ -85,8 +85,8 @@ export default function TodayPage() {
                 <div className="habit-sequence">
                   <p>
                     Sequência atual:{" "}
-                    <span className={habit.done && "record"}>
-                      {habit.currentSequence} dias
+                    <span className={habit.done ? "record" : ""}>
+                      {habit.currentSequence} {habit.currentSequence === 1 ? "dia" : "dias" }
                     </span>
                   </p>
                   <p>
@@ -95,10 +95,10 @@ export default function TodayPage() {
                       className={
                         habit.currentSequence === habit.highestSequence &&
                         habit.done
-                          && "record"
+                          ? "record" : ""
                       }
                     >
-                      {habit.highestSequence} dias
+                      {habit.highestSequence} {habit.highestSequence === 1 ? "dia" : "dias"}
                     </span>
                   </p>
                 </div>

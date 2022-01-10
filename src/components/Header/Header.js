@@ -2,14 +2,17 @@ import { Container } from "./style";
 import { useContext } from "react";
 import UserContext from "../../Contexts/userContext";
 import {IoLogOutOutline} from "react-icons/io5"
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate()
 
   function logOut(){
     if(window.confirm("Gostaria de sair deste usuário?")){
       localStorage.clear();
-      window.location.reload();
+      setUser(null)
+      navigate("/")
     }
   }
 
