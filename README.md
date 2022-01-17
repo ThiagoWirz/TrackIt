@@ -10,16 +10,16 @@ Demo link: https://track-it-auzguov28-thiagowirz.vercel.app/
 
 This is an web application with which lots of people can create, delete and manage their habits. Below are the implemented features:
 
-Sign Up
-LogIn
-LogIn persistence
-Create and Delete habits
-Check Habits
-Check Progress for daily Habits
+- Sign Up
+- LogIn
+- LogIn persistence
+- Create and Delete habits
+- Check Habits
+- Check Progress for daily Habits
 
 Future features
 
-Habits Historic
+- Habits Historic
 
 # Technologies
 
