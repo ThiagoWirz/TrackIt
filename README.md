@@ -8,7 +8,7 @@ Demo link: https://track-it-auzguov28-thiagowirz.vercel.app/
 
 # About
 
-This is an web application with which lots of people can create, delete and manage their habits. Below are the implemented features:
+This is an web application which you can create, delete and manage their habits. Below are the implemented features:
 
 - Sign Up
 - LogIn
